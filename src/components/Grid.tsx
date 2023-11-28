@@ -15,12 +15,12 @@ interface TaskMap {
 interface DayProps {
   date: Date;
   tasks: Task[];
-  onDropTask: (taskId: number, date: Date) => void;
+  onDropTask: (taskId: number, date: Date, dropIndex: number) => void;
 }
 
-const TaskCard: React.FC<{ task: Task }> = ({ task }) => {
+const TaskCard: React.FC<{ task: Task, index: number }> = ({ task, index }) => {
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData('text/plain', task.id.toString());
+    e.dataTransfer.setData('text/plain', JSON.stringify({ taskId: task.id, index }));
   };
 
   return (
@@ -42,8 +42,9 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
 
   const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
-    const taskId = parseInt(e.dataTransfer.getData('text/plain'));
-    onDropTask(taskId, date);
+    const { taskId, index } = JSON.parse(e.dataTransfer.getData('text/plain'));
+    const dropIndex = determineDropIndex(e.clientY, tasks.length);
+    onDropTask(taskId, date, dropIndex);
   };
 
   return (
@@ -54,13 +55,19 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
     >
       <div className="date">{format(date, 'd')}</div>
       <div className="tasks">
-        {tasks.map(task => (
-          <TaskCard key={task.id} task={task} />
+        {tasks.map((task, index) => (
+          <TaskCard key={task.id} task={task} index={index} />
         ))}
       </div>
     </div>
   );
 };
+
+function determineDropIndex(dropY:any, tasksCount:any) {
+  // This is a simplistic way to determine the drop index based on the Y position.
+  // For a more accurate approach, you would calculate the position of each task element.
+  return Math.min(Math.floor(dropY / 100), tasksCount - 1); // Assuming each task has an approximate height of 100px
+}
 
 const WeekdayHeader: React.FC = () => {
   const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -90,27 +97,28 @@ const MonthCalendar: React.FC = () => {
   const startDay = startOfWeek(startOfMonth(currentMonth));
   const endDay = endOfWeek(endOfMonth(currentMonth));
 
-  const moveTaskToDay = (taskId: number, newDate: Date) => {
+  const moveTaskToDay = (taskId: number, newDate: Date, dropIndex: number) => {
     const newDateString = format(newDate, 'yyyy-MM-dd');
     let updatedTasks = { ...tasks };
 
     let currentTaskDate = '';
     let currentTask: Task | null = null;
     for (const [dateString, taskArray] of Object.entries(updatedTasks)) {
-      const foundTask = taskArray.find(task => task.id === taskId);
-      if (foundTask) {
-        currentTask = foundTask;
+      const foundTaskIndex = taskArray.findIndex(task => task.id === taskId);
+      if (foundTaskIndex !== -1) {
+        currentTask = taskArray[foundTaskIndex];
         currentTaskDate = dateString;
+        taskArray.splice(foundTaskIndex, 1); // Remove the task from its current position
         break;
       }
     }
 
-    if (currentTask && currentTaskDate !== newDateString) {
-      updatedTasks[currentTaskDate] = updatedTasks[currentTaskDate].filter(task => task.id !== taskId);
+    if (currentTask) {
       if (!updatedTasks[newDateString]) {
         updatedTasks[newDateString] = [];
       }
-      updatedTasks[newDateString].push(currentTask);
+
+      updatedTasks[newDateString].splice(dropIndex, 0, currentTask); // Insert the task at the new position
 
       setTasks(updatedTasks);
     }
