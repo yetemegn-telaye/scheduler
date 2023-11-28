@@ -1,0 +1,49 @@
+.calendar {
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .month-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    grid-template-rows: auto; /* rows will size based on content */
+    gap: 10px;
+    margin: 20px;
+  }
+  
+  .day-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+  }
+  
+  .day-box .date {
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  /* Optional: Highlight the current day */
+  .day-box.today {
+    border-color: blue;
+    background-color: #f0f8ff;
+  }
+  
+  /* Optional: Different style for weekend days */
+  .day-box.weekend {
+    background-color: #f7f7f7;
+  }
+  .weekdays-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    margin-bottom: 10px;
+  }
+  
+  .weekday {
+    text-align: center;
+    font-weight: bold;
+  }
+  
