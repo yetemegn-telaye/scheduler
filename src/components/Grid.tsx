@@ -1,97 +1,67 @@
 import React, { useState } from 'react';
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, addMonths, format } from 'date-fns';
 import './CalendarGrid.css';
+import WeekdayHeader from './WeekDayHeader';
+import DayBox  from './DayBox';
 
-interface Task {
+export interface Label {
+    id: number;
+    text: string;
+    color: string;
+
+  }
+
+export interface Task {
   id: number;
   title: string;
-  description: string;
+  labels: Label[]; // Array of labels
 }
 
 interface TaskMap {
   [date: string]: Task[];
 }
 
-interface DayProps {
-  date: Date;
-  tasks: Task[];
-  onDropTask: (taskId: number, date: Date, dropIndex: number) => void;
-}
-
-const TaskCard: React.FC<{ task: Task, index: number }> = ({ task, index }) => {
-  const handleDragStart = (e: React.DragEvent<HTMLDivElement>) => {
-    e.dataTransfer.setData('text/plain', JSON.stringify({ taskId: task.id, index }));
-  };
-
-  return (
-    <div
-      draggable="true"
-      onDragStart={handleDragStart}
-      className="task-card"
-    >
-      <div className="task-title">{task.title}</div>
-      <div className="task-description">{task.description}</div>
-    </div>
-  );
-};
-
-const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
-  const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-  };
-
-  const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    const { taskId, index } = JSON.parse(e.dataTransfer.getData('text/plain'));
-    const dropIndex = determineDropIndex(e.clientY, tasks.length);
-    onDropTask(taskId, date, dropIndex);
-  };
-
-  return (
-    <div
-      className="day-box"
-      onDragOver={handleDragOver}
-      onDrop={handleDrop}
-    >
-      <div className="date">{format(date, 'd')}</div>
-      <div className="tasks">
-        {tasks.map((task, index) => (
-          <TaskCard key={task.id} task={task} index={index} />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-function determineDropIndex(dropY:any, tasksCount:any) {
-  // This is a simplistic way to determine the drop index based on the Y position.
-  // For a more accurate approach, you would calculate the position of each task element.
-  return Math.min(Math.floor(dropY / 100), tasksCount - 1); // Assuming each task has an approximate height of 100px
-}
-
-const WeekdayHeader: React.FC = () => {
-  const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  return (
-    <div className="weekdays-header">
-      {weekdays.map(day => (
-        <div key={day} className="weekday">
-          {day}
-        </div>
-      ))}
-    </div>
-  );
-};
 
 const MonthCalendar: React.FC = () => {
+
   const [currentMonth, setCurrentMonth] = useState<Date>(new Date());
+  const [selectedLabels, setSelectedLabels] = useState<Label[]>([])
+  const [labels, setLabels] = useState<Label[]>([
+    // Example labels
+    { id: 1, text: 'Urgent', color: 'red' },
+    { id: 2, text: 'Work', color: 'blue' },
+    // Add more labels as needed
+  ]);
+
+  const handleCreateLabel = (newLabel: Label) => {
+    setLabels(prev => [...prev, newLabel]);
+  };
+  
+  const handleEditLabel = (updatedLabel: Label) => {
+    setLabels(prev => prev.map(label => label.id === updatedLabel.id ? updatedLabel : label));
+  };
+  
+  const handleFilterByLabel = (label: Label) => {
+    setSelectedLabels(prev => {
+      if (prev.includes(label)) {
+        return prev.filter(l => l.id !== label.id);
+      } else {
+        return [...prev, label];
+      }
+    });
+  };
+  
+
   const [tasks, setTasks] = useState<TaskMap>({
     [format(new Date(), 'yyyy-MM-dd')]: [
-      { id: 1, title: 'Task 1', description: 'Description 1' },
-      { id: 2, title: 'Task 2', description: 'Description 1' },
+      { id: 1, title: 'Task 1',labels: [labels[0], labels[1]]},
+      { id: 2, title: 'Task 2',labels: [labels[1]]},
       // Add more tasks for specific dates as needed
     ],
     // Additional dates and their tasks...
   });
+
+  
 
   const monthYear = format(currentMonth, 'MMMM yyyy');
   const startDay = startOfWeek(startOfMonth(currentMonth));
@@ -131,6 +101,8 @@ const MonthCalendar: React.FC = () => {
       <DayBox
         key={day.toISOString()}
         date={day}
+        allTasks = {tasks}
+        setTask={setTasks}
         tasks={tasks[dayString] || []}
         onDropTask={moveTaskToDay}
       />
@@ -145,6 +117,7 @@ const MonthCalendar: React.FC = () => {
       <button onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}>
         Next Month
       </button>
+      {JSON.stringify(tasks)}
       <h2>{monthYear}</h2>
       <WeekdayHeader />
       <div className="month-grid">

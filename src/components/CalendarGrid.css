@@ -13,6 +13,7 @@
   
   .day-box {
     border: 1px solid #ccc;
+    background-color: #eee;
     padding: 10px;
     min-height: 100px;
     display: flex;
@@ -59,6 +60,7 @@
     padding: 10px;
     margin-top: 5px;
     border-radius: 5px;
+    min-height: 10;
     /* box shadow */
     
   }
@@ -71,3 +73,12 @@
   .task-description {
     font-size: 0.9em;
   }
+
+  .label-color-box {
+    display: inline-block;
+    width: 50px;  /* Width of the box */
+    height: 10px; /* Height of the box */
+    margin: 2px;
+    border-radius: 4px; /* Optional: for rounded corners */
+  }
+  
