@@ -22,8 +22,8 @@ export const moveTask = (taskId:number|string, newDate:any) => ({
 });
 
 // Action to delete a task
-export const deleteTask = (taskId:number|string) => ({
+export const deleteTask = (taskId: number) => ({
   type: DELETE_TASK,
-  payload: taskId,
+  payload: taskId ,
 });
 

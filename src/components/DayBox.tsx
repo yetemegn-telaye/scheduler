@@ -34,7 +34,7 @@ const DayBox: React.FC<any> = ({ date,setTask, tasks, onDropTask,allTasks, openA
         className="day-box"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
-        onDoubleClick={openAddTaskModal}
+        // onClick={openAddTaskModal(date)}
       >
         <div className="date">{format(date, 'd')}</div>
         <div className="tasks">

@@ -63,7 +63,17 @@ function rootReducer(state = initialState, action:Action) {
       return state;
     case DELETE_TASK:
       // Logic to delete task
-      return state;
+      
+      const taskIdToDelete = action.payload;
+      let tasks = { ...state.tasks };
+      for (const [dateString, taskArray] of Object.entries(tasks)) {
+        const foundTaskIndex = taskArray.findIndex(task => task.id === taskIdToDelete);
+        if (foundTaskIndex !== -1) {
+          taskArray.splice(foundTaskIndex, 1); // Remove the task from its current position
+          break;
+        }
+      }
+      return { ...state, tasks };
     default:
       return state;
   }
