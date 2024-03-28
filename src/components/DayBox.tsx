@@ -1,4 +1,4 @@
-import { Task } from "./Grid";
+import { Task } from "../interfaces/common";
 import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, addDays, addMonths, format } from 'date-fns';
 import { TaskCard } from "./TaskCard";
 
@@ -14,7 +14,7 @@ function determineDropIndex(dropY:any, tasksCount:any) {
     onDropTask: (taskId: number, date: Date, dropIndex: number) => void;
   }
 
-const DayBox: React.FC<any> = ({ date,setTask, tasks, onDropTask,allTasks }) => {
+const DayBox: React.FC<any> = ({ date,setTask, tasks, onDropTask,allTasks, openAddTaskModal }) => {
     const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
       e.preventDefault();
     };
@@ -26,12 +26,15 @@ const DayBox: React.FC<any> = ({ date,setTask, tasks, onDropTask,allTasks }) => 
       const dropIndex = determineDropIndex(e.clientY, tasks.length);
       onDropTask(taskId, date, dropIndex);
     };
-  
+
+
+
     return (
       <div
         className="day-box"
         onDragOver={handleDragOver}
         onDrop={handleDrop}
+        onDoubleClick={openAddTaskModal}
       >
         <div className="date">{format(date, 'd')}</div>
         <div className="tasks">
