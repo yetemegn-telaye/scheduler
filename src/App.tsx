@@ -1,14 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import MonthCalendar from './components/Grid';
+import "./App.css";
+import { Provider } from "react-redux";
+import store from "./redux/store";
+
+import MonthCalendar from "./components/Grid";
 
 function App() {
   return (
     <>
-    <MonthCalendar/>
+      <Provider store={store}>
+       
+        <MonthCalendar />
+      </Provider>
     </>
   );
+  
 }
 
 export default App;
