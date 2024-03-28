@@ -1,6 +1,6 @@
 // actions.ts
 import { Task } from '../interfaces/common';
-import { ADD_TASK, MOVE_TASK, DELETE_TASK } from './actionTypes';
+import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL } from './actionTypes';
 
 
 
@@ -10,7 +10,7 @@ export interface Action {
 }
 
 // Action to add a new task
-export const addTask = (task:Task) => ({
+export const addTask = (task: Partial<Task>) => ({
   type: ADD_TASK,
   payload: task,
 });
@@ -27,3 +27,12 @@ export const deleteTask = (taskId: number) => ({
   payload: taskId ,
 });
 
+export const toggleModal = (modalState: boolean) => ({
+  type: TOGGLE_MODAL,
+  payload: modalState,
+});
+
+export const selectedDate = (selectedDate: any) => ({
+  type: 'SELECTED_DATE',
+  payload: selectedDate,
+});

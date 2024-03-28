@@ -16,7 +16,8 @@ export interface Label {
 export interface Task {
   id: number;
   title: string;
-  labels: Label[]; // Array of labels
+  labels: Label[];
+  date:any 
 }
 
 export interface TaskMap {

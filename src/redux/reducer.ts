@@ -1,6 +1,6 @@
 // reducers.ts
 import { Action } from './action';
-import { ADD_TASK, MOVE_TASK, DELETE_TASK } from './actionTypes';
+import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL } from './actionTypes';
 import { format } from 'date-fns';
 
 const initialState = {
@@ -13,6 +13,8 @@ const initialState = {
     ],
     // Additional dates and their tasks...
   },
+  modalOpen: false,
+  selectedDate: new Date
 };
 
 function rootReducer(state = initialState, action:Action) {
@@ -20,9 +22,8 @@ function rootReducer(state = initialState, action:Action) {
     case ADD_TASK:
       // Logic to add task
 
-      const { title, labels } = action.payload;
-      const date = format(new Date(), 'yyyy-MM-dd');
-      const newTask = { id: Math.random(), title, labels };
+      const { title, labels, date } = action.payload;
+      const newTask = { id: Math.random(), title, labels,date};
       const newUpdatedTasks = { ...state.tasks };
 
       if (!newUpdatedTasks[date]) {
@@ -74,6 +75,14 @@ function rootReducer(state = initialState, action:Action) {
         }
       }
       return { ...state, tasks };
+      
+      case TOGGLE_MODAL:
+        // Update modalopen to action payload
+        return { ...state, modalOpen: action.payload };
+
+    case 'SELECTED_DATE':
+      // Update selected date to action payload
+      return { ...state, selectedDate: action.payload };
     default:
       return state;
   }
