@@ -26,15 +26,14 @@ Task Scheduler📆<a name="about-project"></a>
 <b>Task Scheduler📆</b> is a web app that manages our daily tasks. The intention behind this project is to create an npm package that allows other developers to use instead of building one from scratch.
 
 
-### Toos <a name="tech-stack"></a>
+### Tools Used <a name="tech-stack"></a>
 
 
 <details>
-  TOOLS USED: 
-    - React
-    - Typescript
-    - GSAP
-    - Tailwind Css
+    - [ ] React
+    - [ ] Typescript
+    - [ ] GSAP
+    - [ ] Tailwind Css
 </details>
 
 ### App Screenshot
