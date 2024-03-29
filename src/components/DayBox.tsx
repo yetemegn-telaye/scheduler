@@ -5,6 +5,7 @@ import { TaskCard } from "./TaskCard";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from '../redux/action';
 import { selectDate } from '../redux/action';
+import { isBefore, isSameDay } from 'date-fns';;
 
 
 
@@ -18,6 +19,8 @@ interface DayProps {
 const determineDropIndex = (dropY: number, tasksCount: number) => {
   return Math.min(Math.floor(dropY / 100), tasksCount - 1);
 };
+
+
 
 const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
   const selectedDate = useSelector((state: any) => state.selectedDate);
@@ -40,9 +43,14 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
     dispatch(selectDate(date));
   }
 
+
+
+const currentDate = new Date();
+const isDayBeforeToday = isBefore(date, currentDate) && !isSameDay(date, currentDate);
+
   return (
     <div
-      className="bg-gray-100 rounded-lg p-4 shadow-md flex flex-col space-y-2 relative"
+      className={`bg-gray-200 ${isDayBeforeToday? 'opacity-70': ''} rounded-lg p-4 shadow-md flex flex-col space-y-2 relative`}
       onDragOver={handleDragOver}
       onDrop={handleDrop}
     >
@@ -52,12 +60,14 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
           <TaskCard key={task.id} task={task} date={format(date, 'yyyy-MM-dd')} index={index} />
         ))}
       </div>
+      
       <button
-        className="absolute top-2 right-2 text-blue-500 hover:text-blue-700"
+        className={`absolute top-2 right-2 text-${isDayBeforeToday? "gray": "blue"}-300 hover:text-blue-700`}
         onClick={() => {
           handleSelectDate(date);
           openAddTaskModal(selectedDate)}
         }
+        disabled={isDayBeforeToday}
       >
         <svg className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />

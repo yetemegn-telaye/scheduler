@@ -1,8 +1,10 @@
 // reducers.ts
+import SocketService from '../network/websocket';
 import { Action } from './action';
 import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL, SELECT_DATE } from './actionTypes';
 import { format } from 'date-fns';
 
+const socketService:SocketService = new SocketService();
 const initialState = {
   tasks: {
     [format(new Date(), 'yyyy-MM-dd')]: [
@@ -29,6 +31,9 @@ function rootReducer(state = initialState, action:Action) {
         newUpdatedTasks[date] = [];
       }
       newUpdatedTasks[date].push(newTask);
+      /* **** Add socket here ****
+       socketService.taskAdded(newTask); */
+
       return { ...state, tasks: newUpdatedTasks };
       
     case MOVE_TASK:
@@ -55,11 +60,11 @@ function rootReducer(state = initialState, action:Action) {
           updatedTasks[newDateString] = [];
         }
         updatedTasks[newDateString].push(currentTask); 
+         /* **** Move socket here ****
+       socketService.moveTask(newTask); */
         return { ...state, tasks: updatedTasks };
       }
 
-      
-     
       return state;
     case DELETE_TASK:
       // Logic to delete task
