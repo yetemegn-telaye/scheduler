@@ -41,7 +41,7 @@ Task Scheduler📆<a name="about-project"></a>
     - [x] GSAP
     </li>
     <li>
-    - [x]Tailwind Css
+    - [x] Tailwind Css
     </li>
 </ul>
 
@@ -132,6 +132,13 @@ It is not ready for tests yet
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
+## 🔭 Future Features <a name="future-features"></a>
+
+- [ ]  Add Holday integrations
+- [ ]  Packaging the app as an npm package
+- [ ]  Responsive
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🤝 Contributing <a name="contributing"></a>
 
@@ -151,10 +158,4 @@ Give a ⭐️ if you like this project!
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
-## 🔭 Future Features <a name="future-features"></a>
 
-- [ ]  Add Holday integrations
-- [ ]  Packaging the app as an npm package
-- [ ]  Responsive
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
