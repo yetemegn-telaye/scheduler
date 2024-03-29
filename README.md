@@ -45,8 +45,11 @@ Task Scheduler📆<a name="about-project"></a>
     </li>
 </ul>
 
-### App Screenshot
-![screenshot](https://github.com/PrantoshB/HandyMate-Backend/blob/dev/screenshot.jpg)
+## App Screenshot
+
+![Task Scheduler Screenshot](./app-screenshot.png)
+
+
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -132,13 +135,6 @@ It is not ready for tests yet
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## 🔭 Future Features <a name="future-features"></a>
-
-- [ ]  Add Holday integrations
-- [ ]  Packaging the app as an npm package
-- [ ]  Responsive
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ## 🤝 Contributing <a name="contributing"></a>
 
