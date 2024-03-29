@@ -72,23 +72,11 @@ You can check if Git is installed by running the following command in the termin
 ```
 $ git --version
 ```
+For docker implementation use the following command:
 
-Likewise for Node.js and npm for package installation.
-```
-$ node --version && npm --version
-```
-### Setup
-
-Clone this repository using the GitHub link provided below.
+docker build .
 
 
-### Install
-
-In the terminal, go to your file directory and run this command.
-
-```
-$ git clone https://github.com/yetemegn-telaye/scheduler.git
-```
 
 
 
