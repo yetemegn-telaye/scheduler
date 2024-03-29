@@ -32,7 +32,7 @@ Task Scheduler📆<a name="about-project"></a>
 
 <ul>
 <li>
-    - [x] React
+    - [x] React/Redux
 </li>
 <li>
     - [x] Typescript
