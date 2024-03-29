@@ -49,7 +49,7 @@ Task Scheduler📆<a name="about-project"></a>
 
 ![Task Scheduler Screenshot](./app-screenshot.png)
 
-## Screen Record
+## App Preview
 ![alt text](screenrecord-task2.gif)
 
 
