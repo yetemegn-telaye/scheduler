@@ -23,7 +23,7 @@ const WeekdayHeader: React.FC = () => {
           <div
             key={day}
             ref={(el) => (weekdayRefs.current[index] = el)}
-            className={`px-4 py-2 rounded-full ${isToday ? 'bg-blue-500' : 'bg-gray-700'} text-gray-300`}
+            className={`px-4 py-2 rounded-full ${isToday ? 'bg-blue-700' : 'bg-gray-700'} text-gray-300`}
             style={{ transition: 'transform 0.5s' }}
           >
             {day}

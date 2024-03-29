@@ -39,7 +39,7 @@ const MonthCalendar: React.FC = () => {
 <div className="flex justify-between items-center">
     <button 
         onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-l-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+        className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-l-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
     >
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -62,7 +62,7 @@ const MonthCalendar: React.FC = () => {
 
     <button 
         onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-        className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none ml-4"
+        className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none ml-4"
     >
         Next Month
         <svg 
