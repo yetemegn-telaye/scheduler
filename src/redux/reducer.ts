@@ -1,6 +1,6 @@
 // reducers.ts
 import { Action } from './action';
-import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL } from './actionTypes';
+import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL, SELECT_DATE } from './actionTypes';
 import { format } from 'date-fns';
 
 const initialState = {
@@ -8,13 +8,12 @@ const initialState = {
     [format(new Date(), 'yyyy-MM-dd')]: [
       { id: 1, title: 'Task 1',labels: [  { id: 1, text: 'Urgent 😪', color: 'red' },  { id: 2, text: 'chill☺️', color: 'blue' }]},
       { id: 2, title: 'Task 2',labels: [ { id: 1, text: 'Urgent 😪', color: 'red' },  { id: 2, text: 'chill☺️', color: 'blue' }]},
-      { id: 3, title: 'Task 3',labels: [ { id: 1, text: 'Urgent 😪', color: 'red' },  { id: 2, text: 'chill☺️', color: 'blue' }]},
       // Add more tasks for specific dates as needed
     ],
     // Additional dates and their tasks...
   },
   modalOpen: false,
-  selectedDate: new Date
+  selectedDate: new Date(),
 };
 
 function rootReducer(state = initialState, action:Action) {
@@ -80,7 +79,7 @@ function rootReducer(state = initialState, action:Action) {
         // Update modalopen to action payload
         return { ...state, modalOpen: action.payload };
 
-    case 'SELECTED_DATE':
+    case SELECT_DATE:
       // Update selected date to action payload
       return { ...state, selectedDate: action.payload };
     default:

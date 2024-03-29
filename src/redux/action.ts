@@ -1,6 +1,6 @@
 // actions.ts
 import { Task } from '../interfaces/common';
-import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL } from './actionTypes';
+import { ADD_TASK, MOVE_TASK, DELETE_TASK, TOGGLE_MODAL, SELECT_DATE } from './actionTypes';
 
 
 
@@ -32,7 +32,8 @@ export const toggleModal = (modalState: boolean) => ({
   payload: modalState,
 });
 
-export const selectedDate = (selectedDate: any) => ({
-  type: 'SELECTED_DATE',
-  payload: selectedDate,
+// action creators
+export const selectDate = (date: Date) => ({
+  type: SELECT_DATE,
+  payload: date
 });

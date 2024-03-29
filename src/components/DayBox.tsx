@@ -4,7 +4,8 @@ import { format } from 'date-fns';
 import { TaskCard } from "./TaskCard";
 import { useDispatch, useSelector } from 'react-redux';
 import { toggleModal } from '../redux/action';
-import { selectedDate } from '../redux/action';
+import { selectDate } from '../redux/action';
+
 
 
 interface DayProps {
@@ -35,8 +36,8 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
     dispatch(toggleModal(true));
   }
 
-  const selectDate = (date: Date) => {
-    dispatch(selectedDate(date));
+  const handleSelectDate = (date: any) => {
+    dispatch(selectDate(date));
   }
 
   return (
@@ -54,8 +55,9 @@ const DayBox: React.FC<DayProps> = ({ date, tasks, onDropTask }) => {
       <button
         className="absolute top-2 right-2 text-blue-500 hover:text-blue-700"
         onClick={() => {
-          
-          openAddTaskModal(date)}}
+          handleSelectDate(date);
+          openAddTaskModal(selectedDate)}
+        }
       >
         <svg className="w-6 h-6 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
           <path fillRule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clipRule="evenodd" />

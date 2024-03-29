@@ -13,10 +13,20 @@ import { useSelector } from "react-redux";
 
 function App() {
   const isModalOpen = useSelector((state:any) => state.modalOpen);
+  const selectedDate = useSelector((state:any) => state.selectedDate);
   const [title, setTitle] = useState("");
-  const currentDate = format(new Date(), "yyyy-MM-dd");
   const modalRef = useRef(null);
   const dispatch = useDispatch();
+
+
+  const labelColors = [
+    { name: 'Urgent', value: 'red' },
+    { name: 'not urgent', value: 'blue' },
+    { name: 'chill', value: 'green' },
+    { name: 'Asap', value: 'yellow' },
+    // Add more colors as needed
+  ];
+  const [labelColor, setLabelColor] = useState(labelColors[0].value);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -25,8 +35,8 @@ function App() {
         duration: 0.5,
         x: 0,
         y: 0,
-        width: "30%",
-        height: "50%",
+        width: "50%",
+        height: "60%",
         borderTopRightRadius: 0,
         borderBottomLeftRadius: 0,
         ease: "power4.out",
@@ -56,7 +66,12 @@ function App() {
 
   const handleSubmit = (e:any) => {
     e.preventDefault();
-    dispatch(addTask({ title, labels: [], date: currentDate }))
+    const newTask = { 
+      title: title,
+      labels: [{ id:Math.random() ,color: labelColor, text: labelColor }], // Set default labels if needed or gather them from state/form
+      date: format(selectedDate, 'yyyy-MM-dd')
+    };
+    dispatch(addTask(newTask))
     setTitle("");
    dispatch(toggleModal(false));
   };
@@ -81,33 +96,51 @@ function App() {
                 </button>
                 <h1 className="text-lg font-bold mb-4 text-gray-800">Add Task</h1>
                 <form onSubmit={handleSubmit}>
-                  <div className="mb-4">
-                    <label className="block mb-2 text-gray-800">Title:</label>
-                    <input
-                      type="text"
-                      value={title}
-                      onChange={(e) => setTitle(e.target.value)}
-                      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                      required
-                    />
-                  </div>
-                  <div className="mb-4">
-                    <label className="block mb-2 text-gray-800">Date:</label>
-                    <input
-                      type="date"
-                      value={currentDate}
-                      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
-                      required
-                      disabled
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300"
-                  >
-                    Add Task
-                  </button>
-                </form>
+  <div className="mb-4">
+    <label className="block mb-2 text-gray-800">Title:</label>
+    <input
+      type="text"
+      value={title}
+      name="title"
+      onChange={(e) => setTitle(e.target.value)}
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+      required
+    />
+  </div>
+  <div className="mb-4">
+    <label className="block mb-2 text-gray-800">Label Color:</label>
+    <select
+      name="labelColor"
+      value={labelColor}
+      onChange={(e) => setLabelColor(e.target.value)}
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+    >
+      {labelColors.map((color) => (
+        <option key={color.value} value={color.value}>
+          {color.name}
+        </option>
+      ))}
+    </select>
+  </div>
+  <div className="mb-4">
+    <label className="block mb-2 text-gray-800">Date:</label>
+    <input
+      type="date"
+      name="date"
+      value={format(selectedDate, "yyyy-MM-dd")}
+      className="w-full px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+      required
+      disabled
+    />
+  </div>
+  <button
+    type="submit"
+    className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md transition duration-300"
+  >
+    Add Task
+  </button>
+</form>
+
               </div>
             </div>
           )}

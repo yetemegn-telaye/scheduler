@@ -58,7 +58,7 @@ const MonthCalendar: React.FC = () => {
         Previous Month
     </button>
 
-    <div className="text-xl font-bold text-gray-800">{monthYear}</div>
+    <div className="text-xl font-bold text-white">{monthYear}</div>
 
     <button 
         onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
