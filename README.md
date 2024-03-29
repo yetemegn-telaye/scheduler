@@ -17,8 +17,9 @@
     - [Usage](#usage)
   - [👥 Authors ](#-authors-)
   - [🔭 Future Features ](#-future-features-)
+  - [🙏 Contributions ](#-contributions-)
   - [⭐️ Show your support ](#️-show-your-support-)
-  - [🙏 Acknowledgments ](#-acknowledgments-)
+  
 
 
 Task Scheduler📆<a name="about-project"></a>
@@ -29,12 +30,20 @@ Task Scheduler📆<a name="about-project"></a>
 ### Tools Used <a name="tech-stack"></a>
 
 
-<details>
-    - [ ] React
-    - [ ] Typescript
-    - [ ] GSAP
-    - [ ] Tailwind Css
-</details>
+<ul>
+<li>
+    - [x] React
+</li>
+<li>
+    - [x] Typescript
+    </li>
+    <li>
+    - [x] GSAP
+    </li>
+    <li>
+    - [x]Tailwind Css
+    </li>
+</ul>
 
 ### App Screenshot
 ![screenshot](https://github.com/PrantoshB/HandyMate-Backend/blob/dev/screenshot.jpg)
@@ -146,5 +155,6 @@ Give a ⭐️ if you like this project!
 
 - [ ]  Add Holday integrations
 - [ ]  Packaging the app as an npm package
+- [ ]  Responsive
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
