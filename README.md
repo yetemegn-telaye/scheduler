@@ -49,7 +49,8 @@ Task Scheduler📆<a name="about-project"></a>
 
 ![Task Scheduler Screenshot](./app-screenshot.png)
 
-
+## Screen Record
+![alt text](screenrecord-task2.gif)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
