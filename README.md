@@ -72,6 +72,8 @@ You can check if Git is installed by running the following command in the termin
 ```
 $ git --version
 ```
+<b>Docker</b>
+
 For docker implementation use the following command:
 
 docker build .
