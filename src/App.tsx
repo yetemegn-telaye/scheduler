@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import {addTask, toggleModal} from "./redux/action";
 import gsap from "gsap";
 
-import MonthCalendar from "./components/Grid";
+import MonthCalendar from "./components/MonthCalendar";
 import { useSelector } from "react-redux";
 
 function App() {
