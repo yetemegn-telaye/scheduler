@@ -8,7 +8,6 @@
     grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
     grid-template-rows: auto; /* rows will size based on content */
     gap: 10px;
-    margin: 20px;
   }
   
   .day-box {

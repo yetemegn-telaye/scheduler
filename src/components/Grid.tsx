@@ -35,11 +35,11 @@ const MonthCalendar: React.FC = () => {
   const days = useCalendarDays({ startDay, endDay}).renderDays();
 
   return (
-    <div className="calendar m-3">
+    <div className="calendar m-3 w-1/2 m-auto mt-16">
 <div className="flex justify-between items-center">
     <button 
         onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}
-        className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-l-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
+        className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-l-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none"
     >
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
@@ -55,16 +55,16 @@ const MonthCalendar: React.FC = () => {
                 d="M15 19l-7-7 7-7"
             />
         </svg>
-        Previous Month
+        Previous
     </button>
 
     <div className="text-xl font-bold text-white">{monthYear}</div>
 
     <button 
         onClick={() => setCurrentMonth(addMonths(currentMonth, 1))}
-        className="bg-blue-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-r-md transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none ml-4"
+        className="bg-purple-700 hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-r-full transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none ml-4"
     >
-        Next Month
+        Next
         <svg 
             xmlns="http://www.w3.org/2000/svg" 
             className="h-6 w-6 inline-block ml-2" 
@@ -83,7 +83,7 @@ const MonthCalendar: React.FC = () => {
 </div>
 
       <WeekdayHeader />
-      <div className="month-grid">
+      <div className="month-grid mt-6">
         {days}
       </div>
     </div>
